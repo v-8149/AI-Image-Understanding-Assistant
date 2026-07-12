@@ -1,41 +1,28 @@
 import cv2
-from tkinter import Tk, filedialog
 import os
 
-# Hide tkinter window
-root = Tk()
-root.withdraw()
+from objDetection import detect_objects
 
-# Open file selection window
-image_path = filedialog.askopenfilename(
-    title="Select an Image",
-    filetypes=[
-        ("Image Files", "*.jpg *.jpeg *.png")
-    ]
-)
+image_path = "/home/vaishnavishivade/Project/sample.jpg"
 
-if image_path:
+if os.path.exists(image_path):
 
-    # Read image using OpenCV
     image = cv2.imread(image_path)
 
     if image is None:
         print("Cannot read image")
+
     else:
-        # Image dimensions
-        height, width = image.shape[:2]
-
         print("Image uploaded successfully")
-        print("--------------------------")
-        print("File name:", os.path.basename(image_path))
-        print("Width:", width)
-        print("Height:", height)
 
-        # Display image
-        cv2.imshow("Uploaded Image", image)
+        detected_image = detect_objects(image)
 
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        output_path = "detected_object.jpg"
+
+        cv2.imwrite(output_path, detected_image)
+
+        print("\nDetection completed!")
+        print(f"Output image saved as: {output_path}")
 
 else:
-    print("No image selected")
+    print("Image not found.")
