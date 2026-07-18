@@ -16,7 +16,7 @@ from ocr import run_ocr
 # Edit these values to point at your own image/model, then run:
 #   python main.py
 # ------------------------------------------------------------
-IMAGE_PATH = "image1.jpeg"  # input image path
+IMAGE_PATH = "img2.png"  # input image path
 
 DETECTION_MODEL_PATH = "yolo11n.pt"
 DETECTION_OUTPUT_PATH = "detected_object.jpg"
